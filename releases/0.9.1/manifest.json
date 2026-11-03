@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "approved": true,
+  "version": "0.9.1",
+  "filename": "GigaCore-0.9.1-x64.msi",
+  "sha256": "10a4be78428e6143a5edc11b2033d3768bbb2bee7517e93810a88e327f6ce189",
+  "size": 389120,
+  "scanFile": "GigaCore-0.9.1-x64.scan.json",
+  "scanReportSha256": "eaa1f93bbd042b41af702ffb2b111819377c4103063bc436c6e6a9603b6a3584",
+  "downloadUrl": "https://github.com/RobiSuarez/gigacore-windows-releases/releases/download/v0.9.1/GigaCore-0.9.1-x64.msi",
+  "scanUrl": "https://github.com/RobiSuarez/gigacore-windows-releases/releases/download/v0.9.1/GigaCore-0.9.1-x64.scan.json",
+  "sourceDigest": "4ba5cafdfcfc84e400e474f4da851ab1934280275791510fa29a5d33dc7920ce"
+}
