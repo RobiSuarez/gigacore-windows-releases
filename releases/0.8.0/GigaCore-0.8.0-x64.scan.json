@@ -1,0 +1,18 @@
+{
+    "schema":  1,
+    "status":  "no-detections",
+    "startedUtc":  "2026-11-03T19:31:24.9309396Z",
+    "directory":  "B:\\ProyectoGigaCore\\gigacore\\windows\\GigaCore.Native\\build\\msi-a9d3b120ab9349e390e4c60820b01bcb\\artifacts\\",
+    "files":  [
+                  {
+                      "name":  "GigaCore-0.8.0-x64.msi",
+                      "size":  380928,
+                      "sha256":  "f006eba3cb394bd1d43ef375a30463a71d998097b603703571f862966ba84214"
+                  }
+              ],
+    "error":  null,
+    "engine":  "1.1.26100.4",
+    "signatures":  "1.463.104.0",
+    "signaturesUpdated":  "2026-11-03T03:26:39.0000000Z",
+    "finishedUtc":  "2026-11-03T19:31:27.6890420Z"
+}

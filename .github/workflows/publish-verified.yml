@@ -1,0 +1,47 @@
+name: Publicar instalador verificado
+
+on:
+  push:
+    branches: [main]
+    paths: [current.json, releases/**, verify_release.py, .github/workflows/publish-verified.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publicar-windows
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'RobiSuarez/gigacore-windows-releases'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Verificar instalador, huellas e informe de Defender
+        id: release
+        run: python3 verify_release.py
+      - name: Crear borrador y comprobar archivos publicados
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="v${RELEASE_VERSION}"
+          folder="releases/${RELEASE_VERSION}"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'La versión ya existe. No se sustituyen archivos publicados.' >&2
+            exit 1
+          fi
+          gh release create "$tag" "$folder/GigaCore-${RELEASE_VERSION}-x64.msi" "$folder/GigaCore-${RELEASE_VERSION}-x64.scan.json" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "GigaCore Windows ${RELEASE_VERSION}" --notes-file "$folder/notes.md" --draft
+          mkdir downloaded-release
+          gh release download "$tag" --repo "$GITHUB_REPOSITORY" --dir downloaded-release --pattern '*.msi' --pattern '*.scan.json'
+          python3 verify_release.py --downloaded downloaded-release
+          gh release edit "$tag" --repo "$GITHUB_REPOSITORY" --draft=false --latest
