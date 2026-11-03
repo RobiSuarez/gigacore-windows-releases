@@ -1,0 +1,2 @@
+*.msi -text
+*.scan.json -text
